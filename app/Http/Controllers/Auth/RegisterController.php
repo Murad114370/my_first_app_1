@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers\Auth;
 
@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
+    /**
+     * Where to redirect users after registration.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/dashboard';
+
     public function showRegistrationForm()
     {
         return view('auth.register'); // Custom registration view
@@ -31,6 +38,6 @@ class RegisterController extends Controller
 
         Auth::login($user); // Automatically login after registration
 
-        return redirect()->route('dashboard')->with('success', 'Registration successful!');
+        return redirect($this->redirectTo)->with('success', 'Registration successful!');
     }
 }
