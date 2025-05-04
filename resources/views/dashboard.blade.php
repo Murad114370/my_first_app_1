@@ -277,11 +277,22 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link">
+            <!-- <a href="#" class="nav-link">
                 <i class="fas fa-user-shield"></i>
                 Admin
-            </a>
+            </a> -->
+            <a href="{{ route('admin.index') }}" class="nav-link">
+    <i class="fas fa-user-shield"></i>
+    Admin
+</a>
+
+
+<a href="{{ route('admin.reservations') }}" class="active">
+    <i class="fas fa-history"></i> Reservation History
+</a>
+
         </li>
+
         <li class="nav-item">
             <a href="#" class="nav-link">
                 <i class="fas fa-users"></i>

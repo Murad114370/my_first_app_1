@@ -7,6 +7,13 @@ use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DashboardController;
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ParkingSpaceController;
+
+
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -31,3 +38,34 @@ Route::post('reset-password', [ResetPasswordController::class, 'reset'])->name('
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
+
+
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Route::post('/admin/update/{id}', [AdminController::class, 'update'])->name('admin.update');
+Route::delete('/admin/delete/{id}', [AdminController::class, 'destroy'])->name('admin.destroy');
+
+
+// Parking Spaces Management
+Route::prefix('parking-spaces')->group(function () {
+    Route::get('/', [ParkingSpaceController::class, 'index'])->name('parking-spaces.index');
+    Route::get('/create', [ParkingSpaceController::class, 'create'])->name('parking-spaces.create');
+    Route::post('/', [ParkingSpaceController::class, 'store'])->name('parking-spaces.store');
+    Route::get('/{id}', [ParkingSpaceController::class, 'show'])->name('parking-spaces.show');
+    Route::get('/{id}/edit', [ParkingSpaceController::class, 'edit'])->name('parking-spaces.edit');
+    Route::put('/{id}', [ParkingSpaceController::class, 'update'])->name('parking-spaces.update');
+    Route::delete('/{id}', [ParkingSpaceController::class, 'destroy'])->name('parking-spaces.destroy');
+    Route::get('/availability', [ParkingSpaceController::class, 'availability'])->name('parking-spaces.availability');
+    Route::post('/{id}/reserve', [ParkingSpaceController::class, 'reserve'])->name('parking-spaces.reserve');
+    Route::post('/{id}/release', [ParkingSpaceController::class, 'release'])->name('parking-spaces.release');
+});
+
+
+Route::prefix('admin')->group(function () {
+    Route::get('/reservations', function () {
+        return view('admin.reservation-history');
+    })->name('admin.reservations');
+});
+
+
+
+
