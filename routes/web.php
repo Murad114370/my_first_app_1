@@ -14,6 +14,10 @@ use App\Http\Controllers\ParkingSpaceController;
 
 
 
+
+
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -65,6 +69,15 @@ Route::prefix('admin')->group(function () {
         return view('admin.reservation-history');
     })->name('admin.reservations');
 });
+
+
+
+
+// For authenticated users only
+Route::middleware(['auth'])->group(function() {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
+});
+
 
 
 

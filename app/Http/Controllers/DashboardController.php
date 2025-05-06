@@ -8,6 +8,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('dashboard'); // Make sure dashboard.blade.php exists
+        return view('dashboard', [
+            // Pass any data needed for the dashboard
+        ]);
     }
 }
